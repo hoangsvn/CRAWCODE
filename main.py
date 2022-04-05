@@ -12,6 +12,8 @@ def LoadDrive():
 
 
 def RunChrome():
+    brower.set_window_position(0,0)
+    brower.set_window_size(50,50)
     brower.get("https://code.ptit.edu.vn")
     SaveFolder()
 # LoginPTITcode
