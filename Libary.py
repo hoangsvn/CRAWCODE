@@ -3,7 +3,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 
 
-load_dotenv()
+load_dotenv(dotenv_path='Driver/.env')
 Save_Code = int(environ.get('Save_Code'))
 Save_History = int(environ.get('Save_History'))
 Folder_path = environ.get('Folder_path')

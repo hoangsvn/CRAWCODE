@@ -4,15 +4,16 @@ from time import sleep
 from Libary import *
 from dotenv import load_dotenv
 from os import environ
-load_dotenv()
+load_dotenv(dotenv_path='Driver/.env')
 # loadDrive
 def LoadDrive():
-    return webdriver.Chrome(executable_path="./chromedriver.exe")
+    return webdriver.Chrome(executable_path="Driver/chromedriver.exe")
 # KhoiChay Chrome
 
 
 def RunChrome():
     SaveFolder()
+    Clearcmd()
     brower.set_window_position(0,0)
     brower.set_window_size(50,50)
     brower.get("https://code.ptit.edu.vn")
@@ -21,10 +22,12 @@ def RunChrome():
 
 def LoginPTIT():
     sleep(1)
+    Clearcmd()
     brower.find_element_by_id("login__user").send_keys(environ.get('login__user'))
     password = brower.find_element_by_id("login__pw")
     password.send_keys(environ.get('login__pw'))
     password.send_keys(Keys.ENTER)
+    Clearcmd()
     sleep(1)
     if len(brower.find_elements_by_class_name("text--red")) == 1:
         Clearcmd()
@@ -39,9 +42,10 @@ def ListTenbai():
     for i in range(1, 4):
         brower.get("https://code.ptit.edu.vn/student/question?page="+str(i))
         crawl = brower.find_elements_by_class_name("bg--10th")
+        Clearcmd()
         for i in range(len(crawl)):
             List.append(crawl[i].find_element_by_xpath("td[3]/a").text)
-    Clearcmd()
+    
     return List
 
 
