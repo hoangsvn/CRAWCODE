@@ -8,8 +8,8 @@ def Delete():
         system('del  main.py')
         system('del  README.md')
         system('del  Libary.py')
-        system('del  rmdir /q /s Driver')
-        system('del  rmdir /q /s __pycache__')
+        system('rmdir /q /s Driver')
+        system('rmdir /q /s __pycache__')
         system('del  Uninstall.py')
     else :
         print('Wrong Password')
