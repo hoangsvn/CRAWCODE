@@ -49,7 +49,6 @@ def Error(string):
 def TrangThai(a, b):
     Clearcmd()
     if a != b:
-        print(
-            f'<=================[RUNING {int((a/b)*100)} % ]=================>')
+        print(f'<=================[RUNING {int((a/b)*100)} % ]=================>')
     else:
         print(f'<=================[SAVE FOlDER DATA]=================>')

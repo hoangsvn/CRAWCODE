@@ -41,6 +41,7 @@ def ListTenbai():
         crawl = brower.find_elements_by_class_name("bg--10th")
         for i in range(len(crawl)):
             List.append(crawl[i].find_element_by_xpath("td[3]/a").text)
+    Clearcmd()
     return List
 
 
