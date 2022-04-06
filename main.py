@@ -1,10 +1,10 @@
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep
 from Libary import *
-
-
+from dotenv import load_dotenv
+from os import environ
+load_dotenv()
 # loadDrive
 def LoadDrive():
     return webdriver.Chrome(executable_path="./chromedriver.exe")
@@ -12,18 +12,18 @@ def LoadDrive():
 
 
 def RunChrome():
+    SaveFolder()
     brower.set_window_position(0,0)
     brower.set_window_size(50,50)
     brower.get("https://code.ptit.edu.vn")
-    SaveFolder()
 # LoginPTITcode
 
 
 def LoginPTIT():
     sleep(1)
-    brower.find_element_by_id("login__user").send_keys("B19DCAT079")
+    brower.find_element_by_id("login__user").send_keys(environ.get('login__user'))
     password = brower.find_element_by_id("login__pw")
-    password.send_keys("02042001")
+    password.send_keys(environ.get('login__pw'))
     password.send_keys(Keys.ENTER)
     sleep(1)
     if len(brower.find_elements_by_class_name("text--red")) == 1:
