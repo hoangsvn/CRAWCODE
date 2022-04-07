@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep
-from Libary import *
+from Libary import Clearcmd,TrangThai,SaveFolder,History,GhiFileCode,Error
 from dotenv import load_dotenv
 from os import environ
 load_dotenv(dotenv_path='Driver/.env')
