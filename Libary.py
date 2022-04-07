@@ -1,4 +1,4 @@
-from os import system, environ
+from os import popen, system, environ
 from datetime import datetime
 from dotenv import load_dotenv
 
@@ -52,3 +52,18 @@ def TrangThai(a, b):
         print(f'<=================[RUNING {int((a/b)*100)} % ]=================>')
     else:
         print(f'<=================[SAVE FOlDER DATA]=================>')
+
+def google_version():
+    stream = popen('reg query "HKLM\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Google Chrome"')
+    output = stream.read()
+    try:
+        google_version = ''
+        for letter in output[output.rindex('DisplayVersion    REG_SZ') + 24:]:
+            if letter != '\n':
+                google_version += letter
+            else:
+                break
+        return(google_version.strip())
+    except TypeError:
+        return
+
