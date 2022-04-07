@@ -67,3 +67,8 @@ def google_version():
     except TypeError:
         return
 
+def Check_Version():
+    if environ.get('google_version')==google_version():
+        return True
+    else :
+        return False
