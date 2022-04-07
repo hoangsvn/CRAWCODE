@@ -1,4 +1,4 @@
-from os import popen, system, environ
+from os import popen, system, environ,mkdir
 from datetime import datetime
 from dotenv import load_dotenv
 
@@ -15,8 +15,7 @@ def Clearcmd():
 
 
 def SaveFolder():
-    cmd = f'md {Folder_path}'
-    system(cmd)
+   mkdir(Folder_path)
 
 
 def Delete():
@@ -67,8 +66,4 @@ def google_version():
     except TypeError:
         return
 
-def Check_Version():
-    if environ.get('google_version')==google_version():
-        return True
-    else :
-        return False
+
