@@ -1,4 +1,4 @@
-from os import popen, system, environ,getenv
+from os import system,getenv
 from datetime import datetime
 from dotenv import load_dotenv
 
