@@ -1,16 +1,16 @@
-from os import system,environ,mkdir
+from os import environ,mkdir
 from datetime import datetime
 from dotenv import load_dotenv
 
 
-load_dotenv(dotenv_path='.env')
+load_dotenv()
 Save_Code =environ.get('Save_Code')
 Save_History = environ.get('Save_History')
 Folder_path = environ.get('Folder_path')
 profile='\n# Nguoi viet : Nguyen Xuan Hoang \n# Date : 05/04/2022\n# Email : hoangnxb19dcat079.gmail.com\n'
 endfile ='\n# Oke nha\n'
-
-
+print(Save_Code)
+print(Folder_path)
 def SaveFolder():
     try:
         mkdir(Folder_path)
