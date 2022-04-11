@@ -56,7 +56,7 @@ def Runtime (i):
         system('cls')
     else:
         Options=webdriver.ChromeOptions()
-        driver = webdriver.Chrome(options=Options)
+        driver = webdriver.Chrome(executable_path='D:\VEN\chromedriver.exe',options=Options)
         driver.set_window_size(60,300)
         driver.set_window_position(i*100,0)
         driver.get('https://code.ptit.edu.vn')
