@@ -9,8 +9,8 @@ Save_History = environ.get('Save_History')
 Folder_path = environ.get('Folder_path')
 profile='\n# Nguoi viet : Nguyen Xuan Hoang \n# Date : 05/04/2022\n# Email : hoangnxb19dcat079.gmail.com\n'
 endfile ='\n# Oke nha\n'
-print(Save_Code)
-print(Folder_path)
+
+
 def SaveFolder():
     try:
         mkdir(Folder_path)
