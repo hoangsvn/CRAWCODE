@@ -1,24 +1,25 @@
-from os import system,getenv
+from os import system,environ,mkdir
 from datetime import datetime
 from dotenv import load_dotenv
 
 
 load_dotenv(dotenv_path='.env')
-Save_Code = int(getenv('Save_Code'))
-Save_History = int(getenv('Save_History'))
-Folder_path = getenv('Folder_path')
+Save_Code =environ.get('Save_Code')
+Save_History = environ.get('Save_History')
+Folder_path = environ.get('Folder_path')
 profile='\n# Nguoi viet : Nguyen Xuan Hoang \n# Date : 05/04/2022\n# Email : hoangnxb19dcat079.gmail.com\n'
 endfile ='\n# Oke nha\n'
 
 
 def SaveFolder():
     try:
-        system(f'md {Folder_path}')
+        mkdir(Folder_path)
     except:
         print(f'{Folder_path} Da ton tai')
+# SaveFolder()
 def GhiFileCode(name, string):
     try:
-        if Save_Code == 1:
+        if Save_Code == '1':
             path = f'{Folder_path}/{name}.py'
             with open(path, 'w+', encoding='utf-8') as File:
                 File.write(profile+string+endfile)
@@ -28,7 +29,7 @@ def GhiFileCode(name, string):
 
 def History(string):
     try:
-        if Save_History == 1:
+        if Save_History == '1':
             path = f'{Folder_path}/history.txt'
             with open(path, 'a+', encoding='UTF-8') as File:
                 File.write(f'{string} LƯA VÀO NGÀY {datetime.now()}\n')
@@ -38,7 +39,7 @@ def History(string):
 
 def Error(string):
     try:
-        if Save_History == 1:
+        if Save_History == '1':
             path = f'{Folder_path}/history.txt'
             with open(path, 'a+', encoding='UTF-8') as File:
                 File.write(
