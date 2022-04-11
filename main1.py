@@ -1,4 +1,3 @@
-from warnings import catch_warnings
 from requests import Session
 from bs4 import BeautifulSoup as BS
 from threading import Thread
@@ -53,7 +52,7 @@ def Runtime (i):
         Crawl(i+1)
     except :
         print(f'TOO MANY REQUESTS IN THREAD {i}')
-    print('END')
+    print(f'THREAD {i} END')
 def Thread3():
     soluorg =3
     threats =[]
