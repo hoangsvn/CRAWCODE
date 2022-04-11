@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup as BS
 url='https://metruyenchu.com/truyen/dinh-cap-khi-van-lang-le-tu-luyen-ngan-nam'
 def Chuong():
     l=int(BS(requests.get(url).text,'html5lib').find('div',class_='font-weight-semibold h4 mb-1').text)
-    return int(l*0.25),int(l*0.25),int(l*0.75),l
+    return int(l*0.25),int(l*0.5),int(l*0.75),l
 x1,x2,x3,l=Chuong() 
 def Crawl(url,a,b):
     try:
