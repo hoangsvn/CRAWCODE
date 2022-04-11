@@ -5,11 +5,10 @@ import Libary
 import html5lib
 from bs4 import BeautifulSoup as BS
 url='https://metruyenchu.com/truyen/dinh-cap-khi-van-lang-le-tu-luyen-ngan-nam'
-l=int(BS(requests.get(url).text,'html5lib').find('div',class_='font-weight-semibold h4 mb-1').text)
-x1=int(l*0.25)
-x2=int(l*0.5)
-x3=int(l*0.75)
-Libary.SaveFoder()
+def Chuong():
+    l=int(BS(requests.get(url).text,'html5lib').find('div',class_='font-weight-semibold h4 mb-1').text)
+    return int(l*0.25),int(l*0.25),int(l*0.75),l
+x1,x2,x3,l=Chuong() 
 def Crawl(url,a,b):
     try:
         for j in range(a,b):
@@ -33,13 +32,23 @@ def Runtime (i):
     except:
         print(f'TOO MANY REQUESTS IN THREAD {i}')
     print(f'THREAD {i} END')
-    
-soluorg =4
-threats =[]
-for i in range(soluorg):
-    threats += [threading.Thread(target=Runtime,args={i})]
-for t in threats:
-    t.start()
-for t in threats:
-    t.join()
-print('end')
+def Thread3():   
+    soluorg =4
+    threats =[]
+    for i in range(soluorg):
+        threats += [threading.Thread(target=Runtime,args={i})]
+    for t in threats:
+        t.start()
+    for t in threats:
+        t.join()
+    print('end')
+def Thread1():
+    for i in range(1,4):
+        Runtime(i)
+if __name__ == '__main__':
+    Libary.SaveFoder()
+    A = input('Chay 3 luong hay 1 luong  :')
+    if A == '1':
+        Thread3()
+    else:
+        Thread1()
