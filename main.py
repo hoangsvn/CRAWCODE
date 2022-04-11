@@ -16,34 +16,40 @@ def LoginPTIT(brower):
     except:
         return
 def Listbai(brower,x):
-    List=[]
-    brower.get("https://code.ptit.edu.vn/student/question?page="+str(x))
-    crawl = brower.find_elements_by_class_name("bg--10th")
-    for i in range(len(crawl)):
-        List.append(crawl[i].find_element_by_xpath("td[3]/a").text)
-    os.system('cls')
-    return List
+    try:
+        List=[]
+        brower.get("https://code.ptit.edu.vn/student/question?page="+str(x))
+        crawl = brower.find_elements_by_class_name("bg--10th")
+        for i in range(len(crawl)):
+            List.append(crawl[i].find_element_by_xpath("td[3]/a").text)
+        os.system('cls')
+        return List
+    except:
+        return
 def Crawl(brower,x,timedelay):
-    m=0
-    list=Listbai(brower,x)
-    Len=len(list)
-    for Bai in list:
-        m+=1
-        brower.get("https://code.ptit.edu.vn/student/question/"+Bai)
-        time.sleep(timedelay)
-        print(f'Thread {x} runing : {int(m*100/Len)} %')
-        TAB = brower.find_elements_by_class_name("card-body")
-        if len(TAB) > 0:
-            if len(TAB[0].find_elements_by_class_name("text--middle")) > 0:
-                brower.get(TAB[0].find_element_by_xpath("div[1]/table/tbody/tr[1]/td[4]/a").get_attribute("href"))
-                time.sleep(timedelay)
-                source = brower.find_element_by_name("source_code")
-                GhiFileCode(Bai, source.get_attribute("value"))
-                os.system('cls')
-                History(brower.find_element_by_class_name("submit__nav").find_element_by_xpath("p/a").text)
-            else:
-                Error(Bai)
-    time.sleep(1)
+    try:
+        m=0
+        list=Listbai(brower,x)
+        Len=len(list)
+        for Bai in list:
+            m+=1
+            brower.get("https://code.ptit.edu.vn/student/question/"+Bai)
+            time.sleep(timedelay)
+            print(f'Thread {x} runing : {int(m*100/Len)} %')
+            TAB = brower.find_elements_by_class_name("card-body")
+            if len(TAB) > 0:
+                if len(TAB[0].find_elements_by_class_name("text--middle")) > 0:
+                    brower.get(TAB[0].find_element_by_xpath("div[1]/table/tbody/tr[1]/td[4]/a").get_attribute("href"))
+                    time.sleep(timedelay)
+                    source = brower.find_element_by_name("source_code")
+                    GhiFileCode(Bai, source.get_attribute("value"))
+                    os.system('cls')
+                    History(brower.find_element_by_class_name("submit__nav").find_element_by_xpath("p/a").text)
+                else:
+                    Error(Bai)
+        time.sleep(1)
+    except:
+        return
 def Runtime (i):
     print(f'Thread {i} runing')
     if i==0:

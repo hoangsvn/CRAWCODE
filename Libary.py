@@ -12,28 +12,36 @@ endfile ='\n# Oke nha\n'
 
 
 def SaveFolder():
-   system(f'md {Folder_path}')
-
-
+    try:
+        system(f'md {Folder_path}')
+    except:
+        print(f'{Folder_path} Da ton tai')
 def GhiFileCode(name, string):
-    if Save_Code == 1:
-        path = f'{Folder_path}/{name}.py'
-        with open(path, 'w+', encoding='utf-8') as File:
-            File.write(profile+string+endfile)
+    try:
+        if Save_Code == 1:
+            path = f'{Folder_path}/{name}.py'
+            with open(path, 'w+', encoding='utf-8') as File:
+                File.write(profile+string+endfile)
+    except:
+        return
 
 
 def History(string):
-    if Save_History == 1:
-        path = f'{Folder_path}/history.txt'
-        with open(path, 'a+', encoding='UTF-8') as File:
-            File.write(f'{string} LƯA VÀO NGÀY {datetime.now()}\n')
+    try:
+        if Save_History == 1:
+            path = f'{Folder_path}/history.txt'
+            with open(path, 'a+', encoding='UTF-8') as File:
+                File.write(f'{string} LƯA VÀO NGÀY {datetime.now()}\n')
+    except:
+        return
 
 
 def Error(string):
-    if Save_History == 1:
-        path = f'{Folder_path}/history.txt'
-        with open(path, 'a+', encoding='UTF-8') as File:
-            File.write(
-                f'{string} CHƯA LÀM HOẶC LÀM SAI LƯA VÀO NGÀY {datetime.now()}\n')
-
-
+    try:
+        if Save_History == 1:
+            path = f'{Folder_path}/history.txt'
+            with open(path, 'a+', encoding='UTF-8') as File:
+                File.write(
+                    f'{string} CHƯA LÀM HOẶC LÀM SAI LƯA VÀO NGÀY {datetime.now()}\n')
+    except:
+        return
