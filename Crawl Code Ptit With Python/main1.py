@@ -82,7 +82,7 @@ def Thread1():
 
 if __name__ == '__main__':
     SaveFolder()
-    A = input('Chay 3 luong hay 1 luong  yes=1/no=0 recommand = 0 :')
+    A = input('Chay 3 luong hay 1 luong  :')
     if A == '1':
         Thread3()
     else:
