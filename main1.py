@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as BS
 from threading import Thread
 from time import sleep 
 from Libary import GhiFileCode,History,SaveFolder
-from os import environ
+from os import getenv
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -15,7 +15,7 @@ def Login():
             brower=s.get(url=url)
             conten=BS(brower.content,'html.parser')
             token=conten.find('input',{'name':'_token'})['value']
-            data={'username': environ.get('login__user')  ,'password': environ.get('login__pw'),'_token':token}
+            data={'username': getenv('login__user')  ,'password': getenv('login__pw'),'_token':token}
             s.post(url=url,data=data)
     except:
         print('ERROR')

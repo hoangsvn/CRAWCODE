@@ -7,11 +7,14 @@ from dotenv import load_dotenv
 from Libary import History,GhiFileCode,Error
 load_dotenv(dotenv_path='.env')
 def LoginPTIT(brower):
-    brower.find_element_by_id("login__user").send_keys(os.environ.get('login__user'))
-    password = brower.find_element_by_id("login__pw")
-    password.send_keys(os.environ.get('login__pw'))
-    os.system('cls')
-    password.send_keys(Keys.ENTER)
+    try:
+        brower.find_element_by_id("login__user").send_keys(os.getenv('login__user'))
+        password = brower.find_element_by_id("login__pw")
+        password.send_keys(os.getenv('login__pw'))
+        os.system('cls')
+        password.send_keys(Keys.ENTER)
+    except:
+        return
 def Listbai(brower,x):
     List=[]
     brower.get("https://code.ptit.edu.vn/student/question?page="+str(x))
