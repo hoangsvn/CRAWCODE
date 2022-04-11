@@ -16,7 +16,7 @@ def SaveFolder():
         mkdir(Folder_path)
     except:
         print(f'{Folder_path} Da ton tai')
-# SaveFolder()
+
 def GhiFileCode(name, string):
     try:
         if Save_Code == '1':
