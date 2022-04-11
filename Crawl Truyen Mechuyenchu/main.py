@@ -13,23 +13,26 @@ Libary.SaveFoder()
 def Crawl(url,a,b):
     try:
         for j in range(a,b):
-            urlst=f'{url}/chuong-{j}'
-            soup=BS(requests.get(urlst).text,'html5lib')
+            soup=BS(requests.get(f'{url}/chuong-{j}').text,'html5lib')
             text=str(soup.find(id='js-read__content').text).replace('"' ,'\n')
             Libary.GhiFileCode(f'chuong{j}',text)
     except:
         return
 def Runtime (i):
-    print(i)
-    if i%4==0:
-        Crawl(url,1,x1)
-    elif i%4==1 :
-        Crawl(url,x1,x2)
-    elif i%4==2 :
-        Crawl(url,x2,x3)
-    elif i%4==3 :
-        Crawl(url,x3,l)
-    time.sleep(1)
+    print(f'THREAD {i} RUNING')
+    try:
+        if i%4==0:
+            Crawl(url,1,x1)
+        elif i%4==1 :
+            Crawl(url,x1,x2)
+        elif i%4==2 :
+            Crawl(url,x2,x3)
+        elif i%4==3 :
+            Crawl(url,x3,l)
+        time.sleep(1)
+    except:
+        print(f'TOO MANY REQUESTS IN THREAD {i}')
+    print(f'THREAD {i} END')
     
 soluorg =4
 threats =[]
