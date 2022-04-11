@@ -1,3 +1,4 @@
+.gitignore
 Data1
 __pycache__
 gp.py
