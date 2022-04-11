@@ -17,5 +17,6 @@ def Delete():
         else :
             print('Wrong Password')
     except:
+        print('ERROR')
         return
 Delete()
