@@ -79,8 +79,10 @@ def Thread1():
 
 if __name__ == '__main__':
     SaveFolder()
-    A=input('Chay 3 luong hay 1 luong   :')
-    if A=='1':
+    A = input('SPEED 3X PRESS ANY 1X PRESS 0 : ')
+    if A != '1':
+        print('SPEED 3X')
         Thread3()
-    else :
+    else:
+        print('SPEED 1X')
         Thread1()
