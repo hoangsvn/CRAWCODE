@@ -8,6 +8,9 @@ delay = 3
 
 
 def Login():
+    loginsuccessful=False
+    usname=input('NHAP TAI KHOAN CODEPTIT : ')
+    passwd=input('NHAP PASSWORD  CODEPTIT : ')
     try:
         with Session() as s:
             url = 'https://code.ptit.edu.vn/login'
@@ -15,28 +18,29 @@ def Login():
             conten = BS(brower.content, 'html.parser')
             token = conten.find('input', {'name': '_token'})['value']
             data = {'username': usname, 'password': passwd, '_token': token}
-            s.post(url=url, data=data)
+            a=s.post(url=url, data=data)
+            if a.url=='https://code.ptit.edu.vn/student/question':
+                loginsuccessful=True
     except:
         print('ERROR')
-    return s
+    return loginsuccessful,s
 
 
-def Listbai(x):
+def Listbai(x,a):
     try:
-        a = Login()
         s2 = a.get("https://code.ptit.edu.vn/student/question?page="+str(x))
         sleep(delay)
         list = []
         for i in BS(s2.content, 'html.parser').find_all('tr', {'class': 'bg--10th'}):
             list.append(str(i.text).split()[2])
-        return a, list
+        return list
     except:
         print('ERROR')
 
 
-def Crawl(i):
+def Crawl(i,a):
     try:
-        a, list = Listbai(i)
+        list = Listbai(i,a)
         for I in list:
             bai = BS(a.get("https://code.ptit.edu.vn/student/question/"+I).content,
                      'html.parser').find('td', {'class': 'text--middle'}).text
@@ -51,40 +55,52 @@ def Crawl(i):
         print('ERROR')
 
 
-def Runtime(i):
+def Runtime(i,s):
+
     print(f'THREAD {i} RUNING')
     try:
-        Crawl(i+1)
+        Crawl(i+1,s)
     except:
         print(f'TOO MANY REQUESTS IN THREAD {i}')
     print(f'THREAD {i} END')
 
 
-def Thread3():
+def Thread3(S):
     soluorg = 3
     threats = []
     for i in range(soluorg):
-        threats += [Thread(target=Runtime, args={i})]
+        threats += [Thread(target=Runtime, args={i,S})]
     for t in threats:
         t.start()
     for t in threats:
         t.join()
 
 
-def Thread1():
+def Thread1(S):
     for i in range(0, 4):
         Runtime(i)
 
 
+# def Checklogin():
+#     b,a=Login()
+#     print(b)
+# if __name__ == '__main__':
+#     usname=input('NHAP TAI KHOAN CODEPTIT : ')
+#     passwd=input('NHAP PASSWORD  CODEPTIT : ')
+#     Checklogin()
+
 if __name__ == '__main__':
-    Folder=SaveFolder()
-    usname=input('NHAP TAI KHOAN CODEPTIT : ')
-    passwd=input('NHAP PASSWORD  CODEPTIT : ')
-    A = input('SPEED 3X PRESS ANY 1X PRESS 0 : ')
-    if A != '1':
-        print('SPEED 3X')
-        Thread3()
-    else:
-        print('SPEED 1X')
-        Thread1()
-    print(f'DATACODE IN {Folder} ')
+    T,S=Login()
+    if T :
+        Folder=SaveFolder()
+        print('LOGIN SUCCESSUFUL')
+        A = input('SPEED 3X PRESS ANY OR 1X PRESS 0 : ')
+        if A != '1':
+            print('SPEED 3X')
+            Thread3(S)
+        else:
+            print('SPEED 1X')
+            Thread1(S)
+        print(f'DATACODE IN {Folder} ')
+    else :
+        print('LOGIN FAILED')
