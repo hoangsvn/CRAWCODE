@@ -11,15 +11,19 @@ def SaveFolder():
     try:
         mkdir(Folder_path)
     except:
-        print(f'{Folder_path} Da ton tai')
+        print(f'{Folder_path} DA TON TAI')
     return Folder_path
 
-def GhiFileCode(name, string):
+def GhiFileCode(name, string,loai):
+    list=['.cpp','','','.java','.py']
     try:
         if Save_Code == '1':
-            path = f'{Folder_path}/{name}.py'
+            path = f'{Folder_path}/{name}{list[loai]}'
             with open(path, 'w+', encoding='utf-8') as File:
-                File.write(profile+string+endfile)
+                if loai==4:
+                    File.write(profile+string+endfile)
+                else :
+                    File.write(string)
     except:
         return
 

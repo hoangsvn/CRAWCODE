@@ -4,7 +4,7 @@ from threading import Thread
 from time import sleep
 from Libary import GhiFileCode, History, SaveFolder
 
-delay = 3
+delay = 2.5
 
 
 def Login():
@@ -47,9 +47,9 @@ def Crawl(i,a):
             sleep(delay)
             url1 = 'https://code.ptit.edu.vn/student/solution/'+bai+'/edit'
             bai = BS(a.get(url=url1).content, 'html.parser')
+            X=int(bai.find('option',{'selected':'selected'})['value'])
             History(bai.find('a', {'class': 'link--red'}).text)
-            GhiFileCode(I, bai.find(
-                'input', {'id': 'source_code', 'name': 'source_code'})['value'])
+            GhiFileCode(I, bai.find('input', {'id': 'source_code', 'name': 'source_code'})['value'],X)
             sleep(delay)
     except:
         print('ERROR')
