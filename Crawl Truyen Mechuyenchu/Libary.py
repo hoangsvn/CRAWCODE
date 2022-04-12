@@ -1,5 +1,5 @@
 import os
-import time
+
 Folder_path='DATA'
 def SaveFoder():
     os.system('md DATA')
