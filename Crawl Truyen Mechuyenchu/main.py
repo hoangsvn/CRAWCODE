@@ -9,11 +9,12 @@ def Chuong():
     return int(l*0.25),int(l*0.5),int(l*0.75),l
 
 def Crawl(url,a,b):
+    ten=str(url).split("/")[4]
     try:
         for j in range(a,b):
             soup=BS(requests.get(f'{url}/chuong-{j}').text,'html5lib')
-            text=str(soup.find(id='js-read__content').text).replace('"' ,'\n')
-            Libary.GhiFileCode(f'chuong{j}',text)
+            text=str(soup.find(id='js-read__content').text)
+            Libary.GhiFileCode(f'{ten}-chuong{j}',text)
     except:
         return
 def Runtime (i):
@@ -47,7 +48,7 @@ def Thread1():
         Runtime(i)
 if __name__ == '__main__':
     Libary.SaveFoder()
-    url=input('Nhap url truyen :')
+    url=input('NHAP URL TRUYEN MECHUYENCHU.COM :')
     x1,x2,x3,l=Chuong() 
     A = input('SPEED 4X PRESS ANY 1X PRESS 0 : ')
     if A != '1':
