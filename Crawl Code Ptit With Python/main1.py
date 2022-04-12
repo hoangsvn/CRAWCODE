@@ -22,7 +22,7 @@ def Login():
             if a.url=='https://code.ptit.edu.vn/student/question':
                 log=True
     except:
-        print('ERROR')
+        print('ERROR NO INTERNET CONNECTION')
     return log,s
 
 
@@ -35,7 +35,7 @@ def Listbai(x,a):
             list.append(str(i.text).split()[2])
         return list
     except:
-        print('ERROR')
+        print('ERROR NO INTERNET CONNECTION')
 
 
 def Crawl(i,a):
@@ -52,7 +52,7 @@ def Crawl(i,a):
             GhiFileCode(I, bai.find('input', {'id': 'source_code', 'name': 'source_code'})['value'],X)
             sleep(delay)
     except:
-        print('ERROR')
+        print('ERROR NO INTERNET CONNECTION')
 
 
 def Runtime(i,s):
