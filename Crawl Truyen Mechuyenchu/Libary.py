@@ -6,7 +6,7 @@ def SaveFoder():
 Save_Code=1
 def GhiFileCode(name,string):
     if Save_Code == 1:
-        path = f'{Folder_path}/{name}.txt'
+        path = f'{Folder_path}/{name}.docx'
         with open(path, 'w+', encoding='utf-8') as File:
             File.write(String(string))
 
