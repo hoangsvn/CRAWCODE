@@ -81,14 +81,6 @@ def Thread1(S):
         Runtime(i)
 
 
-# def Checklogin():
-#     b,a=Login()
-#     print(b)
-# if __name__ == '__main__':
-#     usname=input('NHAP TAI KHOAN CODEPTIT : ')
-#     passwd=input('NHAP PASSWORD  CODEPTIT : ')
-#     Checklogin()
-
 if __name__ == '__main__':
     T,S=Login()
     if T :
