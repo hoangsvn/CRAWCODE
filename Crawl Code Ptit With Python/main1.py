@@ -95,4 +95,6 @@ if __name__ == '__main__':
             Thread1(S)
         print(f'DATACODE IN {Folder} ')
     else :
-        print('LOGIN FAILED')
+        print('LOGIN FAILED EXIT AFTER 10 SECONDS')
+        sleep(10)
+
