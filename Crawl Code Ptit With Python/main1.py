@@ -8,7 +8,7 @@ delay = 2.5
 
 
 def Login():
-    loginsuccessful=False
+    log=False
     usname=input('NHAP TAI KHOAN CODEPTIT : ')
     passwd=input('NHAP PASSWORD  CODEPTIT : ')
     try:
@@ -20,10 +20,10 @@ def Login():
             data = {'username': usname, 'password': passwd, '_token': token}
             a=s.post(url=url, data=data)
             if a.url=='https://code.ptit.edu.vn/student/question':
-                loginsuccessful=True
+                log=True
     except:
         print('ERROR')
-    return loginsuccessful,s
+    return log,s
 
 
 def Listbai(x,a):
