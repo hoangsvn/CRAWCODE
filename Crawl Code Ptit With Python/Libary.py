@@ -1,12 +1,12 @@
 from os import environ,mkdir
 from datetime import datetime
-from dotenv import load_dotenv
 
 
-load_dotenv()
-Save_Code =environ.get('Save_Code')
-Save_History = environ.get('Save_History')
-Folder_path = environ.get('Folder_path')
+
+
+Save_Code ='1'
+Save_History = '1'
+Folder_path = 'DATACODE'
 profile='\n# Nguoi viet : Nguyen Xuan Hoang \n# Date : 05/04/2022\n# Email : hoangnxb19dcat079.gmail.com\n'
 endfile ='\n# Oke nha\n'
 
