@@ -1,4 +1,4 @@
-from os import environ,mkdir
+from os import mkdir
 from datetime import datetime
 
 
@@ -16,6 +16,7 @@ def SaveFolder():
         mkdir(Folder_path)
     except:
         print(f'{Folder_path} Da ton tai')
+    return Folder_path
 
 def GhiFileCode(name, string):
     try:

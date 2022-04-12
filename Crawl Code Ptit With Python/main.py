@@ -1,16 +1,15 @@
-from os import getenv,system
+from os import system
 from time import sleep
 from threading import Thread
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from dotenv import load_dotenv
 from Libary import History,GhiFileCode,Error,SaveFolder
-load_dotenv(dotenv_path='.env')
+
 def LoginPTIT(brower):
     try:
-        brower.find_element_by_id("login__user").send_keys(getenv('login__user'))
+        brower.find_element_by_id("login__user").send_keys(usname)
         password = brower.find_element_by_id("login__pw")
-        password.send_keys(getenv('login__pw'))
+        password.send_keys(password)
         system('cls')
         password.send_keys(Keys.ENTER)
     except:
@@ -78,7 +77,9 @@ def Thread1():
         Runtime(i)
 
 if __name__ == '__main__':
-    SaveFolder()
+    Folder=SaveFolder()
+    usname=input('NHAP TAI KHOAN CODEPTIT : ')
+    passwd=input('NHAP PASSWORD  CODEPTIT : ')
     A = input('SPEED 3X PRESS ANY 1X PRESS 0 : ')
     if A != '1':
         print('SPEED 3X')
@@ -86,3 +87,4 @@ if __name__ == '__main__':
     else:
         print('SPEED 1X')
         Thread1()
+    print(f'DATACODE IN {Folder} ')

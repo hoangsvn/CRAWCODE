@@ -77,7 +77,7 @@ def Thread1():
 
 
 if __name__ == '__main__':
-    SaveFolder()
+    Folder=SaveFolder()
     usname=input('NHAP TAI KHOAN CODEPTIT : ')
     passwd=input('NHAP PASSWORD  CODEPTIT : ')
     A = input('SPEED 3X PRESS ANY 1X PRESS 0 : ')
@@ -87,3 +87,4 @@ if __name__ == '__main__':
     else:
         print('SPEED 1X')
         Thread1()
+    print(f'DATACODE IN {Folder} ')
