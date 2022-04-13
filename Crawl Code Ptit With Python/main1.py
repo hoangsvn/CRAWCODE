@@ -7,8 +7,8 @@ from Libary import GhiFileCode, History, SaveFolder
 delay=2.5
 def Login():
     log=False
-    usname= input('NHAP TAI KHOAN CODEPTIT : ') 
-    passwd= input('NHAP PASSWORD  CODEPTIT : ') 
+    usname= input('NHAP TAI KHOAN CODEPTIT ==>') 
+    passwd= input('NHAP PASSWORD  CODEPTIT ==>') 
     try:
         with Session() as s:
             url = 'https://code.ptit.edu.vn/login'
@@ -69,6 +69,7 @@ def Thread3(S):
 
 
 if __name__ == '__main__':
+    print('COPY CODE AC TREN CODE PTIT VE MAY ')
     T,S=Login()
     if T :
         Folder=SaveFolder()
