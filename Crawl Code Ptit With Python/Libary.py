@@ -15,7 +15,7 @@ def SaveFolder():
     return Folder_path
 
 def GhiFileCode(name, string,loai):
-    list=['.cpp','','','.java','.py']
+    list=['.txt','.txt','.cpp','.java','.py','.cs']
     try:
         if Save_Code == '1':
             path = f'{Folder_path}/{name}{list[loai]}'
