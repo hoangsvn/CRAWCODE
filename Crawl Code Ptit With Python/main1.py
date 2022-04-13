@@ -34,7 +34,7 @@ def CrawlCode(x,a):
             listb=BS(s2.content, 'html.parser').find_all('tr', {'class': 'bg--10th'})
         except:
             return
-        sleep(delay)
+        sleep(1)
         if len(listb)>0:
             for i in listb:
                 url = BS(a.get(url=i.find('a')['href']).content, 'html.parser').find('td', {'class': 'text-center'}).find('a')['href']
