@@ -51,6 +51,9 @@ def Thread1():
         Runtime(i)
 if __name__ == '__main__':
     Libary.SaveFoder()
-    url=input('NHAP URL TRUYEN MECHUYENCHU.COM :')
-    x1,x2,x3,l=Chuong() 
-    Thread3()
+    try:
+        url=input('NHAP URL TRUYEN MECHUYENCHU.COM :')
+        x1,x2,x3,l=Chuong() 
+        Thread3()
+    except:
+        print(f'LOI : {url}')
