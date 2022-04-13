@@ -1,5 +1,6 @@
 import threading,time,requests,Libary, html5lib
 from bs4 import BeautifulSoup as BS
+soluorg =4
 def Chuong():
     try:
         l=int(BS(requests.get(url).text,'html5lib').find('div',class_='font-weight-semibold h4 mb-1').text)
@@ -36,7 +37,6 @@ def Runtime (i):
         print(f'TOO MANY REQUESTS IN THREAD {i}')
     print(f'THREAD {i} END')
 def Thread3():   
-    soluorg =4
     threats =[]
     for i in range(soluorg):
         threats += [threading.Thread(target=Runtime,args={i})]
