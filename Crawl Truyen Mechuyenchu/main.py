@@ -36,7 +36,6 @@ def Runtime (i):
         print(f'TOO MANY REQUESTS IN THREAD {i}')
     print(f'THREAD {i} END')
 def Thread3():   
-
     soluorg =4
     threats =[]
     for i in range(soluorg):
