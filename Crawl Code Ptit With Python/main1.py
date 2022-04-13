@@ -4,7 +4,7 @@ from threading import Thread
 from time import sleep
 from Libary import GhiFileCode, History, SaveFolder
 
-
+delay=2.5
 def Login():
     log=False
     usname= input('NHAP TAI KHOAN CODEPTIT : ') 
@@ -19,6 +19,9 @@ def Login():
             a=s.post(url=url, data=data)
             if a.url=='https://code.ptit.edu.vn/student/question':
                 log=True
+                A=BS(s.get(a.url).content,'html.parser').find('p',{'class':'nav__profile__menu__name'}).text
+                sleep(1)
+                print(f'HELLO : {A.upper()}')
     except:
         print('ERROR NO INTERNET CONNECTION')
     return log,s
@@ -26,31 +29,38 @@ def Login():
 
 def CrawlCode(x,a):
     try:
-        s2 = a.get("https://code.ptit.edu.vn/student/question?page="+str(x))
+        try:
+            s2 = a.get("https://code.ptit.edu.vn/student/question?page="+str(x))
+            listb=BS(s2.content, 'html.parser').find_all('tr', {'class': 'bg--10th'})
+        except:
+            return
         sleep(delay)
-        list = []
-        for i in BS(s2.content, 'html.parser').find_all('tr', {'class': 'bg--10th'}):
-            url = BS(a.get(url=i.find('a')['href']).content, 'html.parser').find('td', {'class': 'text-center'}).find('a')['href']
-            sleep(delay)
-            editcode = BS(a.get(url=url).content, 'html.parser')
-            loai=int(editcode.find('option',{'selected':'selected'})['value'])
-            name=editcode.find('input',{'type':'hidden','name':'question'})['value']
-            soure=editcode.find('input', {'id': 'source_code', 'name': 'source_code'})['value']
-            History(editcode.find('a', {'class': 'link--red'}).text)
-            GhiFileCode(name,soure.strip(),loai)
-            sleep(delay)        
+        if len(listb)>0:
+            for i in listb:
+                url = BS(a.get(url=i.find('a')['href']).content, 'html.parser').find('td', {'class': 'text-center'}).find('a')['href']
+                sleep(delay)
+                editcode = BS(a.get(url=url).content, 'html.parser')
+                loai=int(editcode.find('option',{'selected':'selected'})['value'])
+                name=editcode.find('input',{'type':'hidden','name':'question'})['value']
+                soure=editcode.find('input', {'id': 'source_code', 'name': 'source_code'})['value']
+                History(editcode.find('a', {'class': 'link--red'}).text)
+                GhiFileCode(name,soure.strip(),loai)
+                sleep(delay)        
     except:
         print('TOO MANY REQUESTS ')
 
 def Runtime(i,S):
-    print(f'THREAD {i} RUNING')
-    CrawlCode(i+1,S)
-    print(f'THREAD {i} END')
+    try:
+        sleep(i)
+        CrawlCode(i,S)
+        CrawlCode(int(i+3),S)
+    except:
+        return
+soluorg = 4
 
 def Thread3(S):
-    soluorg = 4
     threats = []
-    for i in range(soluorg):
+    for i in range(1,soluorg):
         threats += [Thread(target=Runtime, args={i,S})]
     for t in threats:
         t.start()
@@ -58,29 +68,16 @@ def Thread3(S):
         t.join()
 
 
-def Thread1(S):
-    for i in range(0, 4):
-        Runtime(i)
-
-
 if __name__ == '__main__':
     T,S=Login()
     if T :
         Folder=SaveFolder()
         print('LOGIN SUCCESSUFUL')
-        A = input('SPEED 3X PRESS ANY OR 1X PRESS 0 : ')
-        if A != '1':
-            delay = 2.5
-            print('SPEED 3X')
-            Thread3(S)
-        else:
-            print('SPEED 1X')
-            delay=1.5
-            Thread1(S)
+        print('RUNING ')
+        Thread3(S)
         print(f'DATACODE IN {Folder} ')
-        sleep(10)
+        sleep(5)
     else :
         print('LOGIN FAILED EXIT AFTER 5 SECONDS')
         sleep(5)
     
-

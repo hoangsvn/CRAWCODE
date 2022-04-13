@@ -4,8 +4,12 @@ from datetime import datetime
 Save_Code ='1'
 Save_History = '1'
 Folder_path = 'DATACODE'
-profile='\n# Nguoi viet : Nguyen Xuan Hoang \n# Date : 05/04/2022\n# Email : hoangnxb19dcat079.gmail.com\n'
-endfile ='\n# Oke nha\n'
+profile=['','',
+    '\n// Nguoi viet : Nguyen Xuan Hoang \n// Date : 05/04/2022\n// Email : hoangnxb19dcat079.gmail.com\n',
+    '\n// Nguoi viet : Nguyen Xuan Hoang \n// Date : 05/04/2022\n// Email : hoangnxb19dcat079.gmail.com\n',
+    '\n# Nguoi viet : Nguyen Xuan Hoang \n# Date : 05/04/2022\n# Email : hoangnxb19dcat079.gmail.com\n',
+    '\n// Nguoi viet : Nguyen Xuan Hoang \n// Date : 05/04/2022\n// Email : hoangnxb19dcat079.gmail.com\n']
+endfile =['','','\n// Oke nha\n','\n// Oke nha\n','\n# Oke nha\n','\n// Oke nha\n']
 
 def SaveFolder():
     try:
@@ -20,10 +24,7 @@ def GhiFileCode(name, string,loai):
         if Save_Code == '1':
             path = f'{Folder_path}/{name}{list[loai]}'
             with open(path, 'w+', encoding='utf-8') as File:
-                if loai==4:
-                    File.write(profile+string+endfile)
-                else :
-                    File.write(string)
+                    File.write(profile[loai]+string+endfile[loai])
     except:
         return
 
