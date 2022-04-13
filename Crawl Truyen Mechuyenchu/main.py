@@ -55,4 +55,4 @@ if __name__ == '__main__':
         x1,x2,x3,l=Chuong() 
         Thread3()
     except:
-        print(f'LOI : {url}')
+        print(f'ERROR : {url}')
