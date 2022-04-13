@@ -4,13 +4,11 @@ from threading import Thread
 from time import sleep
 from Libary import GhiFileCode, History, SaveFolder
 
-delay = 2.5
-
 
 def Login():
     log=False
-    usname=input('NHAP TAI KHOAN CODEPTIT : ')
-    passwd=input('NHAP PASSWORD  CODEPTIT : ')
+    usname= input('NHAP TAI KHOAN CODEPTIT : ') or 'B19DCAT079'
+    passwd= input('NHAP PASSWORD  CODEPTIT : ') or '02042001'
     try:
         with Session() as s:
             url = 'https://code.ptit.edu.vn/login'
@@ -26,44 +24,28 @@ def Login():
     return log,s
 
 
-def Listbai(x,a):
+def CrawlCode(x,a):
     try:
         s2 = a.get("https://code.ptit.edu.vn/student/question?page="+str(x))
         sleep(delay)
         list = []
         for i in BS(s2.content, 'html.parser').find_all('tr', {'class': 'bg--10th'}):
-            list.append(str(i.text).split()[2])
-        return list
-    except:
-        print('ERROR NO INTERNET CONNECTION')
-
-
-def Crawl(i,a):
-    try:
-        list = Listbai(i,a)
-        for I in list:
-            bai = BS(a.get("https://code.ptit.edu.vn/student/question/"+I).content,
-                     'html.parser').find('td', {'class': 'text--middle'}).text
+            url = BS(a.get(url=i.find('a')['href']).content, 'html.parser').find('td', {'class': 'text-center'}).find('a')['href']
             sleep(delay)
-            url1 = 'https://code.ptit.edu.vn/student/solution/'+bai+'/edit'
-            bai = BS(a.get(url=url1).content, 'html.parser')
-            X=int(bai.find('option',{'selected':'selected'})['value'])
-            History(bai.find('a', {'class': 'link--red'}).text)
-            GhiFileCode(I, bai.find('input', {'id': 'source_code', 'name': 'source_code'})['value'],X)
-            sleep(delay)
+            editcode = BS(a.get(url=url).content, 'html.parser')
+            loai=int(editcode.find('option',{'selected':'selected'})['value'])
+            name=editcode.find('input',{'type':'hidden','name':'question'})['value']
+            soure=editcode.find('input', {'id': 'source_code', 'name': 'source_code'})['value']
+            History(editcode.find('a', {'class': 'link--red'}).text)
+            GhiFileCode(name,soure.strip(),loai)
+            sleep(delay)        
     except:
-        print('ERROR NO INTERNET CONNECTION')
+        print('TOO MANY REQUESTS ')
 
-
-def Runtime(i,s):
-
+def Runtime(i,S):
     print(f'THREAD {i} RUNING')
-    try:
-        Crawl(i+1,s)
-    except:
-        print(f'TOO MANY REQUESTS IN THREAD {i}')
+    CrawlCode(i+1,S)
     print(f'THREAD {i} END')
-
 
 def Thread3(S):
     soluorg = 3
@@ -88,14 +70,17 @@ if __name__ == '__main__':
         print('LOGIN SUCCESSUFUL')
         A = input('SPEED 3X PRESS ANY OR 1X PRESS 0 : ')
         if A != '1':
+            delay = 2.5
             print('SPEED 3X')
             Thread3(S)
         else:
             print('SPEED 1X')
+            delay=1.5
             Thread1(S)
         print(f'DATACODE IN {Folder} ')
         sleep(10)
     else :
-        print('LOGIN FAILED EXIT AFTER 10 SECONDS')
-        sleep(10)
+        print('LOGIN FAILED EXIT AFTER 5 SECONDS')
+        sleep(5)
+    
 
