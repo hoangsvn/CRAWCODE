@@ -48,7 +48,7 @@ def Runtime(i,S):
     print(f'THREAD {i} END')
 
 def Thread3(S):
-    soluorg = 3
+    soluorg = 4
     threats = []
     for i in range(soluorg):
         threats += [Thread(target=Runtime, args={i,S})]
