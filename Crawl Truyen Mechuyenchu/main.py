@@ -30,7 +30,7 @@ def Runtime (i):
             Crawl(url,x2,x3)
         elif i%4==3 :
             time.sleep(i)
-            Crawl(url,x3,l)
+            Crawl(url,x3,l+1)
         time.sleep(1)
     except:
         print(f'TOO MANY REQUESTS IN THREAD {i}')
