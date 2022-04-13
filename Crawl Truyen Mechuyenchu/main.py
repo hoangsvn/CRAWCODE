@@ -1,8 +1,11 @@
 import threading,time,requests,Libary, html5lib
 from bs4 import BeautifulSoup as BS
 def Chuong():
-    l=int(BS(requests.get(url).text,'html5lib').find('div',class_='font-weight-semibold h4 mb-1').text)
-    return int(l*0.25),int(l*0.5),int(l*0.75),l
+    try:
+        l=int(BS(requests.get(url).text,'html5lib').find('div',class_='font-weight-semibold h4 mb-1').text)
+        return int(l*0.25),int(l*0.5),int(l*0.75),l
+    except:
+        print('URL KHONG TON TAI')
 
 def Crawl(url,a,b):
     ten=str(url).split("/")[4]
@@ -12,7 +15,7 @@ def Crawl(url,a,b):
             text=str(soup.find(id='js-read__content').text)
             Libary.GhiFileCode(f'{ten}-chuong{j}',text)
     except:
-        return
+        print('TOO MANY REQUESTS IN ')
 def Runtime (i):
     print(f'THREAD {i} RUNING')
     try:
