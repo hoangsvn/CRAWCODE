@@ -1,8 +1,4 @@
-import threading
-import time
-import requests
-import Libary
-import html5lib
+import threading,time,requests,Libary, html5lib
 from bs4 import BeautifulSoup as BS
 def Chuong():
     l=int(BS(requests.get(url).text,'html5lib').find('div',class_='font-weight-semibold h4 mb-1').text)
@@ -21,12 +17,16 @@ def Runtime (i):
     print(f'THREAD {i} RUNING')
     try:
         if i%4==0:
+            time.sleep(i)
             Crawl(url,1,x1)
         elif i%4==1 :
+            time.sleep(i)
             Crawl(url,x1,x2)
         elif i%4==2 :
+            time.sleep(i)
             Crawl(url,x2,x3)
         elif i%4==3 :
+            time.sleep(i)
             Crawl(url,x3,l)
         time.sleep(1)
     except:
@@ -50,10 +50,4 @@ if __name__ == '__main__':
     Libary.SaveFoder()
     url=input('NHAP URL TRUYEN MECHUYENCHU.COM :')
     x1,x2,x3,l=Chuong() 
-    A = input('SPEED 4X PRESS ANY 1X PRESS 0 : ')
-    if A != '1':
-        print('SPEED 3X')
-        Thread3()
-    else:
-        print('SPEED 1X')
-        Thread1()
+    Thread3()

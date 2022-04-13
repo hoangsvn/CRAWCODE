@@ -21,11 +21,6 @@ def String(string):
         m+=1
     return str(xau)
 
-def TrangThai(a, b):
-    if a != b:
-        print(f'<=================[RUNING {int((a/b)*100)} % ]=================>')
-    else:
-        print(f'<=================[SAVE FOlDER DATA]=================>')
 
 
 
