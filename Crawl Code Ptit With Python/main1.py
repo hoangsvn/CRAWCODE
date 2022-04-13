@@ -7,8 +7,8 @@ from Libary import GhiFileCode, History, SaveFolder
 
 def Login():
     log=False
-    usname= input('NHAP TAI KHOAN CODEPTIT : ') or 'B19DCAT079'
-    passwd= input('NHAP PASSWORD  CODEPTIT : ') or '02042001'
+    usname= input('NHAP TAI KHOAN CODEPTIT : ') 
+    passwd= input('NHAP PASSWORD  CODEPTIT : ') 
     try:
         with Session() as s:
             url = 'https://code.ptit.edu.vn/login'
