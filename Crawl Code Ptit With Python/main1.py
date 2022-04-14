@@ -4,7 +4,7 @@ from threading import Thread
 from time import sleep
 from Libary import GhiFileCode, History, SaveFolder
 
-delay=2.5
+delay=2.2
 def Login():
     log=False
     usname= input('NHAP TAI KHOAN CODEPTIT ==>') 
@@ -53,7 +53,6 @@ def Runtime(i,S):
     try:
         sleep(i)
         CrawlCode(i,S)
-        CrawlCode(int(i+3),S)
     except:
         return
 soluorg = 4
